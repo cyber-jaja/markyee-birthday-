@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Markyee! 💙</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #244b6b;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at top left, #c9e8ff 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #7db9e8 0%, transparent 35%),
+                linear-gradient(135deg, #dff3ff, #91c9f2, #c8e7ff);
+        }
+
+        /* FLOATING BUBBLES */
+
+        .bubble {
+            position: fixed;
+            bottom: -80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            pointer-events: none;
+            z-index: 1;
+            animation: float 10s linear infinite;
+        }
+
+        .bubble:nth-child(1) {
+            left: 10%;
+            width: 22px;
+            height: 22px;
+            animation-duration: 8s;
+        }
+
+        .bubble:nth-child(2) {
+            left: 27%;
+            width: 35px;
+            height: 35px;
+            animation-duration: 12s;
+        }
+
+        .bubble:nth-child(3) {
+            left: 48%;
+            width: 18px;
+            height: 18px;
+            animation-duration: 9s;
+        }
+
+        .bubble:nth-child(4) {
+            left: 70%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 11s;
+        }
+
+        .bubble:nth-child(5) {
+            left: 88%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh);
+                opacity: 0;
+            }
+        }
+
+        /* OPENING SCREEN */
+
+        #startScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+            background:
+                radial-gradient(circle at top, #c5e6ff, transparent 45%),
+                linear-gradient(135deg, #76b9ec, #e1f2ff);
+
+            transition: opacity 0.7s ease;
+        }
+
+        .start-box {
+            width: 100%;
+            max-width: 430px;
+            padding: 40px 25px;
+            text-align: center;
+
+            background: rgba(255,255,255,0.85);
+            border-radius: 30px;
+
+            box-shadow:
+                0 20px 55px rgba(36, 91, 140, 0.25);
+
+            backdrop-filter: blur(12px);
+        }
+
+        .start-box h1 {
+            font-size: 38px;
+            color: #15558d;
+            margin-bottom: 15px;
+        }
+
+        .start-box p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #4d708d;
+            margin-bottom: 28px;
+        }
+
+        .open-button {
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+
+            background: #2576b9;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow: 0 8px 20px rgba(37,118,185,0.3);
+
+            transition: 0.3s;
+        }
+
+        .open-button:hover {
+            transform: translateY(-3px);
+            background: #185f98;
+        }
+
+        /* MUSIC */
+
+        #musicPlayer {
+            position: fixed;
+            left: -100px;
+            top: -100px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* MAIN CARD */
+
+        .container {
+            position: relative;
+            z-index: 2;
+
+            width: 92%;
+            max-width: 850px;
+
+            margin: 40px auto;
+            padding: 35px 25px;
+
+            background: rgba(255,255,255,0.8);
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 20px 60px rgba(32,83,125,0.22);
+
+            backdrop-filter: blur(12px);
+        }
+
+        /* TITLE */
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 42px;
+            color: #15558d;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            color: #527797;
+            font-size: 17px;
+        }
+
+        /* PHOTO */
+
+        .photo-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 450px;
+
+            margin: auto;
+            padding: 10px;
+
+            background: rgba(255,255,255,0.9);
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 12px 35px rgba(35,91,137,0.2);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            display: block;
+            border-radius: 18px;
+        }
+
+        .caption {
+            margin-top: 15px;
+
+            color: #28648f;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* LETTER */
+
+        .letter {
+            margin-top: 35px;
+            padding: 30px 25px;
+
+            background: rgba(240,248,255,0.9);
+
+            border-radius: 25px;
+
+            border: 1px solid rgba(74,145,202,0.15);
+        }
+
+        .letter h2 {
+            text-align: center;
+
+            color: #15558d;
+
+            font-size: 28px;
+
+            margin-bottom: 25px;
+        }
+
+        .letter p {
+            color: #365b78;
+
+            font-size: 16px;
+            line-height: 1.9;
+
+            margin-bottom: 18px;
+
+            white-space: pre-line;
+        }
+
+        .ending {
+            text-align: center;
+
+            font-weight: bold;
+
+            color: #28648f;
+
+            margin-top: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            margin-top: 30px;
+
+            color: #527797;
+
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+                padding: 25px 17px;
+                margin: 25px auto;
+            }
+
+            .title h1 {
+                font-size: 32px;
+            }
+
+            .start-box h1 {
+                font-size: 32px;
+            }
+
+            .letter {
+                padding: 25px 18px;
+            }
+
+            .letter p {
+                font-size: 15px;
+                line-height: 1.8;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FLOATING BUBBLES -->
+
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+
+    <!-- OPENING SCREEN -->
+
+    <div id="startScreen">
+
+        <div class="start-box">
+
+            <h1>For Markyee 💙</h1>
+
+            <p>
+                You have a little birthday surprise waiting for you. 🎂
+            </p>
+
+            <button class="open-button" onclick="startBirthday()">
+                pa opin pu 💌
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- APOCALYPSE BY CIGARETTES AFTER SEX -->
+
+    <iframe
+        id="musicPlayer"
+        allow="autoplay; encrypted-media"
+        src="">
+    </iframe>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="container">
+
+        <section class="title">
+
+            <h1>Hape BIRTHDAYYYYYYY, Markyee! 💙</h1>
+
+            <p>
+                heuehueheue pabasa pu:)
+            </p>
+
+        </section>
+
+
+        <!-- MARKYEE'S PHOTO -->
+
+        <section class="photo-section">
+
+            <div class="photo-frame">
+
+                <img
+                    src="received_1049279901392837.jpeg"
+                    alt="Markyee's Photo">
+
+            </div>
+
+            <div class="caption">
+                Markyee's Photo 📸💙
+            </div>
+
+        </section>
+
+
+        <!-- BIRTHDAY LETTER -->
+
+        <section class="letter">
+
+            <h2>por u 🎂</h2>
+
+            <p>
+HAPPY BIRTHDAY, MARKYEEEE!! HUHUHUUU HAHAHAHA ANG OA SORRYY finally birthday mo na rin... honestly, gusto ko lang sabihin na i’m really glad na nakilala kita and naging part ka ng life ko be. hindi ko man nasasabi sa'yo markyee, pero i genuinely appreciate u and all the random asaran kineme, kwentuhan, kalokohan, and everything in between. isa ka sa mga taong hindi ko inexpect na magiging ganto ka-close ko, pero somehow naging comfortableness (?? comfy lang teh ang oa TALAGA HAHHAHAHAHAHAHA) ako sa'yo and i’m really thankful for that.  sana ngayong birthday mo, maging masaya ka talaga markyee, sana kahit papaano makapagpahinga ka rin from all the things na iniisip mo, lalo na ung mga bagay na minsan kinikimkim mo lang. i'm really grateful din sa'yo kasi kapag need ko ng advice, kapag need ko ng someone na makikinig sakin, lagi kang nanjan for me... i hope u get the things u’ve been wishing for, not just today but eventually. and whatever happens, sana hindi mo makalimutan na may mga taong genuinely naniniwala sa'yo and gusto kang makita na maging okay and successful sa buhay. isa na ako dun.  thank you for being u, markyee. kahit minsan ang kulit mo at ang hirap mong intindihin HAHAHAHA, i’m still glad na nakilala kita and naging ka-close. sana marami ka pang birthdays na ma-celebrate, marami pang memories na mabuo, and marami pang unexpected good things na dumating sa'yo. enjoy ur day, birthday boy!! deserve mong maging masaya today. 
+
+            </p>
+
+            <p class="ending">
+                happy birthday ulit, markyee. ingat ka palagi and i'm always rooting for u. :))
+            </p>
+
+        </section>
+
+
+        <footer>
+           kahapon ku pa sha ginagawa pero now q lang natapus surri late heueheuey, wav uuu markyee 💙
+        </footer>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function startBirthday() {
+
+            const player =
+                document.getElementById("musicPlayer");
+
+            player.src =
+                "https://www.youtube.com/embed/sElE_BfQ67s?autoplay=1&loop=1&playlist=sElE_BfQ67s";
+
+            const screen =
+                document.getElementById("startScreen");
+
+            screen.style.opacity = "0";
+
+            setTimeout(function() {
+
+                screen.style.display = "none";
+
+            }, 700);
+
+        }
+
+    </script>
+
+</body>
+</html>
